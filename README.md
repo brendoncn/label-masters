@@ -1,1 +1,5 @@
-TODO: Document your project here
+# deploy
+
+```
+> npm run build
+```

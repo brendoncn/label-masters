@@ -4,26 +4,29 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
 import { useLanguage } from "@/i18n/LanguageContext";
 
+const CONTACT_EMAIL = "info@labelmasters.com";
+
 const Contact = () => {
-  const { toast } = useToast();
   const { t } = useLanguage();
-  const [form, setForm] = useState({ name: "", email: "", company: "", message: "" });
+  const [form, setForm] = useState({ name: "", company: "", message: "" });
 
   const contactInfo = [
     { icon: MapPin, label: t("contact.address") as string, value: t("footer.address") as string },
     { icon: Phone, label: t("contact.phone") as string, value: "(852) 2743 2218" },
-    { icon: Mail, label: t("contact.emailLabel") as string, value: "info@labelmasters.com" },
+    { icon: Mail, label: t("contact.emailLabel") as string, value: CONTACT_EMAIL },
     { icon: Clock, label: t("contact.hours") as string, value: t("contact.hoursValue") as string },
   ];
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast({ title: t("contact.toastTitle") as string, description: t("contact.toastDesc") as string });
-    setForm({ name: "", email: "", company: "", message: "" });
-  };
+  const subject = `[${t("contact.headerTitle") as string}] ${form.name || ""} ${form.company ? `- ${form.company}` : ""}`.trim();
+  const body = [
+    `${t("contact.name") as string}: ${form.name}`,
+    `${t("contact.company") as string}: ${form.company}`,
+    "",
+    form.message,
+  ].join("\n");
+  const mailtoHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
   return (
     <Layout>
@@ -39,16 +42,10 @@ const Contact = () => {
         <div className="container-narrow mx-auto grid gap-10 lg:grid-cols-5">
           <div className="lg:col-span-3">
             <h2 className="mb-6 text-xl font-bold text-foreground">{t("contact.sendMessage") as string}</h2>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div>
-                  <label className="mb-1 block text-sm font-medium text-foreground">{t("contact.name") as string} *</label>
-                  <Input required maxLength={100} value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder={t("contact.namePlaceholder") as string} />
-                </div>
-                <div>
-                  <label className="mb-1 block text-sm font-medium text-foreground">{t("contact.email") as string} *</label>
-                  <Input required type="email" maxLength={255} value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="your@email.com" />
-                </div>
+            <div className="space-y-4">
+              <div>
+                <label className="mb-1 block text-sm font-medium text-foreground">{t("contact.name") as string} *</label>
+                <Input maxLength={100} value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder={t("contact.namePlaceholder") as string} />
               </div>
               <div>
                 <label className="mb-1 block text-sm font-medium text-foreground">{t("contact.company") as string}</label>
@@ -56,12 +53,15 @@ const Contact = () => {
               </div>
               <div>
                 <label className="mb-1 block text-sm font-medium text-foreground">{t("contact.message") as string} *</label>
-                <Textarea required maxLength={1000} rows={5} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} placeholder={t("contact.messagePlaceholder") as string} />
+                <Textarea maxLength={1000} rows={5} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} placeholder={t("contact.messagePlaceholder") as string} />
               </div>
-              <Button type="submit" size="lg" className="gradient-hero border-0 text-primary-foreground">
-                {t("contact.submit") as string}
+              <Button asChild size="lg" className="gradient-hero border-0 text-primary-foreground">
+                <a href={mailtoHref}>
+                  <Mail className="mr-2 h-4 w-4" />
+                  {t("contact.submit") as string}
+                </a>
               </Button>
-            </form>
+            </div>
           </div>
 
           <div className="lg:col-span-2">

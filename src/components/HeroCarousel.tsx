@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/i18n/LanguageContext";
-import heroFactory from "@/assets/hero-factory.jpg";
-import heroHangtags from "@/assets/hero-hangtags.jpg";
-import heroLabels from "@/assets/hero-labels.jpg";
-import heroPackaging from "@/assets/hero-packaging.jpg";
+import heroTags from "@/assets/hero-collage-tags.jpg";
+import heroBags from "@/assets/hero-collage-bags.jpg";
+import heroBoxes from "@/assets/hero-collage-boxes.jpg";
+import heroAccessories from "@/assets/hero-collage-accessories.jpg";
 
-const slideImages = [heroFactory, heroHangtags, heroLabels, heroPackaging];
+const slideImages = [heroTags, heroBags, heroBoxes, heroAccessories];
 
-const AUTOPLAY_INTERVAL = 5000;
+const AUTOPLAY_INTERVAL = 6000;
 
 const HeroCarousel = () => {
   const { t } = useLanguage();
@@ -49,24 +49,31 @@ const HeroCarousel = () => {
 
   return (
     <section className="relative min-h-[520px] overflow-hidden lg:min-h-[600px]">
-      {/* Background images */}
+      {/* Clickable background images — clicking jumps to that category */}
       {slideImages.map((img, i) => (
-        <img
+        <Link
           key={i}
-          src={img}
-          alt=""
-          width={1920}
-          height={1080}
-          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
-            i === current ? "opacity-100" : "opacity-0"
+          to={slides[i]?.link ?? "/products"}
+          aria-label={slides[i]?.cta}
+          tabIndex={i === current ? 0 : -1}
+          className={`absolute inset-0 transition-opacity duration-700 ${
+            i === current ? "opacity-100 z-[1]" : "opacity-0 pointer-events-none"
           }`}
-        />
+        >
+          <img
+            src={img}
+            alt={slides[i]?.tag ?? ""}
+            width={1920}
+            height={1080}
+            className="h-full w-full object-cover"
+          />
+        </Link>
       ))}
-      <div className="overlay-dark absolute inset-0" />
+      <div className="overlay-dark absolute inset-0 z-[2] pointer-events-none" />
 
-      {/* Content */}
-      <div className="container-narrow relative z-10 mx-auto flex min-h-[520px] items-center px-4 py-20 sm:px-6 lg:min-h-[600px] lg:px-8">
-        <div className="max-w-2xl">
+      {/* Content (above background, but allow background click outside content) */}
+      <div className="container-narrow relative z-[3] mx-auto flex min-h-[520px] items-center px-4 py-20 sm:px-6 lg:min-h-[600px] lg:px-8 pointer-events-none">
+        <div className="max-w-2xl pointer-events-auto">
           {slides.map((slide, i) => (
             <div
               key={i}
@@ -114,21 +121,21 @@ const HeroCarousel = () => {
       {/* Arrows */}
       <button
         onClick={prev}
-        className="absolute left-4 top-1/2 z-20 -translate-y-1/2 rounded-full bg-background/20 p-2 text-primary-foreground backdrop-blur-sm transition-colors hover:bg-background/40 sm:left-6"
+        className="absolute left-4 top-1/2 z-[4] -translate-y-1/2 rounded-full bg-background/20 p-2 text-primary-foreground backdrop-blur-sm transition-colors hover:bg-background/40 sm:left-6"
         aria-label="Previous slide"
       >
         <ChevronLeft className="h-6 w-6" />
       </button>
       <button
         onClick={next}
-        className="absolute right-4 top-1/2 z-20 -translate-y-1/2 rounded-full bg-background/20 p-2 text-primary-foreground backdrop-blur-sm transition-colors hover:bg-background/40 sm:right-6"
+        className="absolute right-4 top-1/2 z-[4] -translate-y-1/2 rounded-full bg-background/20 p-2 text-primary-foreground backdrop-blur-sm transition-colors hover:bg-background/40 sm:right-6"
         aria-label="Next slide"
       >
         <ChevronRight className="h-6 w-6" />
       </button>
 
       {/* Dots */}
-      <div className="absolute bottom-6 left-1/2 z-20 flex -translate-x-1/2 gap-2">
+      <div className="absolute bottom-6 left-1/2 z-[4] flex -translate-x-1/2 gap-2">
         {slides.map((_, i) => (
           <button
             key={i}

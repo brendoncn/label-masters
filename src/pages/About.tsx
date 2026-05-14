@@ -1,13 +1,9 @@
 import Layout from "@/components/Layout";
-import { Target, Eye, Users, TrendingUp } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
 import aboutImg from "@/assets/about-factory.jpg";
 
-const valueIcons = [Target, Eye, Users, TrendingUp];
-
 const About = () => {
   const { t } = useLanguage();
-  const values = t("about.values") as { title: string; desc: string }[];
   const timelineItems = t("about.timelineItems") as { year: string; event: string }[];
 
   return (
@@ -29,24 +25,6 @@ const About = () => {
             <h2 className="mb-4 text-2xl font-bold text-foreground">{t("about.companyName") as string}</h2>
             <p className="mb-4 text-sm leading-relaxed text-muted-foreground">{t("about.intro1") as string}</p>
             <p className="text-sm leading-relaxed text-muted-foreground">{t("about.intro2") as string}</p>
-          </div>
-        </div>
-      </section>
-
-      <section className="section-padding bg-secondary/50">
-        <div className="container-narrow mx-auto">
-          <h2 className="mb-10 text-center text-2xl font-bold text-foreground">{t("about.coreValues") as string}</h2>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {values.map((v, i) => {
-              const Icon = valueIcons[i];
-              return (
-                <div key={i} className="rounded-lg border border-border bg-card p-6 text-center shadow-card">
-                  <Icon className="mx-auto mb-4 h-8 w-8 text-accent" />
-                  <h3 className="mb-2 text-lg font-semibold text-foreground">{v.title}</h3>
-                  <p className="text-sm text-muted-foreground">{v.desc}</p>
-                </div>
-              );
-            })}
           </div>
         </div>
       </section>

@@ -3,7 +3,7 @@ import type { Language } from "@/i18n/translations";
 
 const options: { value: Language; label: string }[] = [
   { value: "tc", label: "繁" },
-  { value: "sc", label: "简" },
+  // { value: "sc", label: "简" },
   { value: "en", label: "EN" },
 ];
 

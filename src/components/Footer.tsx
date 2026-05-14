@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { MapPin, Phone, Mail } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { CATEGORY_SLUGS } from "@/data/products";
+import logoUrl from "@/assets/label-masters-logo.png";
 
 const navKeys = ["home", "products", "about", "contact"] as const;
 const navPaths = ["/", "/products", "/about", "/contact"];
@@ -14,11 +16,15 @@ const Footer = () => {
       <div className="container-narrow mx-auto px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <div className="mb-4 flex items-center gap-2">
-              <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-accent text-sm font-bold text-accent-foreground">
-                LM
-              </span>
-              <span className="text-lg font-bold">{t("footer.brandName") as string}</span>
+            <div className="mb-4">
+              <img
+                src={logoUrl}
+                alt={t("footer.brandName") as string}
+                // className="h-12 w-auto object-contain [filter:brightness(0)_invert(1)_drop-shadow(0_0_6px_hsl(var(--accent)/0.7))_drop-shadow(0_0_14px_hsl(var(--accent)/0.4))]"
+                className="h-12 w-auto object-contain"
+                style={{ filter: 'drop-shadow(1px 0 0 white) drop-shadow(-1px 0 0 white) drop-shadow(0 1px 0 white) drop-shadow(0 -1px 0 white)' }}
+                height={48}
+              />
             </div>
             <p className="text-sm leading-relaxed opacity-70">{t("footer.desc") as string}</p>
           </div>
@@ -39,9 +45,9 @@ const Footer = () => {
           <div>
             <h4 className="mb-3 text-sm font-semibold uppercase tracking-wider opacity-60">{t("footer.productsTitle") as string}</h4>
             <ul className="space-y-2 text-sm">
-              {productNames.map((p) => (
+              {productNames.map((p, i) => (
                 <li key={p}>
-                  <Link to="/products" className="opacity-70 transition-opacity hover:opacity-100">{p}</Link>
+                  <Link to={`/products/${CATEGORY_SLUGS[i] ?? ""}`} className="opacity-70 transition-opacity hover:opacity-100">{p}</Link>
                 </li>
               ))}
             </ul>
