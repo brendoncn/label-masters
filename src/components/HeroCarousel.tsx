@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -23,6 +23,7 @@ const HeroCarousel = () => {
   }[];
   const [current, setCurrent] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
 
   const goTo = useCallback(
     (index: number) => {
@@ -42,13 +43,43 @@ const HeroCarousel = () => {
     goTo((current - 1 + slides.length) % slides.length);
   }, [current, slides.length, goTo]);
 
+  const SWIPE_MIN = 50;
+
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    const touch = e.touches[0];
+    touchStart.current = { x: touch.clientX, y: touch.clientY };
+  }, []);
+
+  const handleTouchEnd = useCallback(
+    (e: React.TouchEvent) => {
+      if (!touchStart.current) return;
+      const touch = e.changedTouches[0];
+      const dx = touch.clientX - touchStart.current.x;
+      const dy = touch.clientY - touchStart.current.y;
+      touchStart.current = null;
+      if (Math.abs(dx) < SWIPE_MIN || Math.abs(dx) < Math.abs(dy)) return;
+      if (dx > 0) prev();
+      else next();
+    },
+    [next, prev],
+  );
+
+  const handleTouchCancel = useCallback(() => {
+    touchStart.current = null;
+  }, []);
+
   useEffect(() => {
     const timer = setInterval(next, AUTOPLAY_INTERVAL);
     return () => clearInterval(timer);
   }, [next]);
 
   return (
-    <section className="relative min-h-[520px] overflow-hidden lg:min-h-[600px]">
+    <section
+      className="relative min-h-[360px] overflow-hidden touch-pan-y lg:min-h-[400px]"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+      onTouchCancel={handleTouchCancel}
+    >
       {/* Clickable background images — clicking jumps to that category */}
       {slideImages.map((img, i) => (
         <Link
@@ -69,10 +100,11 @@ const HeroCarousel = () => {
           />
         </Link>
       ))}
-      <div className="overlay-dark absolute inset-0 z-[2] pointer-events-none" />
+      <div className="absolute inset-0 z-[2] pointer-events-none" style={{ background: "rgba(0,0,0,0.18)" }} />
+ 
 
       {/* Content (above background, but allow background click outside content) */}
-      <div className="container-narrow relative z-[3] mx-auto flex min-h-[520px] items-center px-4 py-20 sm:px-6 lg:min-h-[600px] lg:px-8 pointer-events-none">
+      <div className="container-narrow relative z-[3] mx-auto flex min-h-[360px] items-center px-4 py-12 sm:px-6 lg:min-h-[400px] lg:px-8 pointer-events-none">
         <div className="max-w-2xl pointer-events-auto">
           {slides.map((slide, i) => (
             <div
@@ -118,17 +150,17 @@ const HeroCarousel = () => {
         </div>
       </div>
 
-      {/* Arrows */}
+      {/* Arrows (hide on mobile, show on sm and up) */}
       <button
         onClick={prev}
-        className="absolute left-4 top-1/2 z-[4] -translate-y-1/2 rounded-full bg-background/20 p-2 text-primary-foreground backdrop-blur-sm transition-colors hover:bg-background/40 sm:left-6"
+        className="absolute left-4 top-1/2 z-[4] -translate-y-1/2 rounded-full bg-background/20 p-2 text-primary-foreground backdrop-blur-sm transition-colors hover:bg-background/40 sm:left-6 hidden sm:block"
         aria-label="Previous slide"
       >
         <ChevronLeft className="h-6 w-6" />
       </button>
       <button
         onClick={next}
-        className="absolute right-4 top-1/2 z-[4] -translate-y-1/2 rounded-full bg-background/20 p-2 text-primary-foreground backdrop-blur-sm transition-colors hover:bg-background/40 sm:right-6"
+        className="absolute right-4 top-1/2 z-[4] -translate-y-1/2 rounded-full bg-background/20 p-2 text-primary-foreground backdrop-blur-sm transition-colors hover:bg-background/40 sm:right-6 hidden sm:block"
         aria-label="Next slide"
       >
         <ChevronRight className="h-6 w-6" />
