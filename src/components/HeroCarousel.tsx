@@ -125,7 +125,7 @@ const HeroCarousel = () => {
                 {slide.desc}
               </p>
               <div className="flex flex-wrap gap-3">
-                <Button
+                {/* <Button
                   asChild
                   size="lg"
                   className="gradient-accent border-0 text-accent-foreground font-semibold"
@@ -133,7 +133,7 @@ const HeroCarousel = () => {
                   <Link to={slide.link}>
                     {slide.cta} <ArrowRight className="ml-1 h-4 w-4" />
                   </Link>
-                </Button>
+                </Button> */}
                 <Button
                   asChild
                   size="lg"

@@ -171,20 +171,20 @@ const ProductDetail = () => {
       </div>
 
       {/* Hero */}
-      <section className="gradient-hero section-padding">
+      <section className="gradient-hero py-4">
         <div className="container-narrow mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col gap-8 lg:flex-row lg:items-center">
+          <div className="flex flex-col lg:gap-8 lg:flex-row lg:items-center">
             <div className="flex-1">
               <p className="mb-2 text-sm font-medium uppercase tracking-widest text-accent">{category.titleEn}</p>
               <h1 className="mb-4 text-3xl font-extrabold text-primary-foreground sm:text-4xl lg:text-5xl">{pageTitle}</h1>
               <p className="mb-6 max-w-lg text-base leading-relaxed text-primary-foreground/80">{pageDesc}</p>
-              <Button asChild size="lg" className="gradient-accent border-0 font-semibold text-accent-foreground">
+              {/* <Button asChild size="lg" className="gradient-accent border-0 font-semibold text-accent-foreground">
                 <Link to="/contact">{t("categoryDetails.inquire") as string} <ArrowRight className="ml-1 h-4 w-4" /></Link>
-              </Button>
+              </Button> */}
             </div>
             <div className="flex-1">
               <div className="overflow-hidden rounded-lg shadow-elevated">
-                <img src={heroImage} alt={pageTitle} className="h-full w-full object-cover aspect-[4/3] " width={1024} height={768} />
+                <img src={heroImage} alt={pageTitle} className="h-full w-full object-cover aspect-[4/3] hidden lg:block" width={1024} height={768} />
               </div>
             </div>
           </div>
@@ -192,7 +192,7 @@ const ProductDetail = () => {
       </section>
 
       {/* Products in this category */}
-      <section className="section-padding bg-secondary/50">
+      <section className="py-8 bg-secondary/50">
         <div className="container-narrow mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="mb-8 text-center text-2xl font-bold text-foreground sm:text-3xl">
             {resolvedProductIdx !== null
@@ -205,7 +205,7 @@ const ProductDetail = () => {
               const gallery = getGallery(i);
               const activeIdx = activePhoto[i] ?? 0;
               return (
-                <div key={i} className="overflow-hidden rounded-lg border border-border bg-card shadow-card lg:max-w-4xl mx-auto">
+                <div key={i} className="overflow-hidden rounded-lg border border-border bg-card shadow-card mx-auto">
                   <div className="p-5">
                     <h3 className="mb-1 text-lg font-semibold text-foreground">{p.name}</h3>
                     <p className="text-sm leading-relaxed text-muted-foreground">{p.desc}</p>
@@ -219,14 +219,14 @@ const ProductDetail = () => {
                           className="h-full w-full object-cover aspect-[4/3] transition-transform duration-500 group-hover:scale-105"
                         />
                       </div>
-                      <div className="md:col-span-1 md:max-h-[480px] md:overflow-y-auto">
-                        <div className="flex gap-3 overflow-x-auto md:flex-col md:overflow-x-visible">
+                      <div className="md:col-span-1 md:max-h-[600px] md:overflow-y-auto">
+                        <div className="flex md:block gap-3 overflow-x-auto md:flex-col md:overflow-x-visible">
                           {gallery.map((src, gi) => (
                             <button
                               key={gi}
                               type="button"
                               onClick={() => setActivePhoto((prev) => ({ ...prev, [i]: gi }))}
-                              className={`shrink-0 aspect-square w-20 overflow-hidden rounded-md border-2 transition-all md:w-full ${
+                              className={`shrink-0 aspect-square w-20 overflow-hidden rounded-md border-2 transition-all md:w-full lg:w-[60px] mr-2 ${
                                 gi === activeIdx
                                   ? "border-accent ring-2 ring-accent/30"
                                   : "border-border hover:border-accent/50"

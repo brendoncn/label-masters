@@ -86,6 +86,22 @@ export const translations = {
     },
     whyUs: { tc: "為何選擇我們", sc: "为何选择我们", en: "Why Choose Us" },
     whyUsTitle: { tc: "值得信賴的生產實力", sc: "值得信赖的生产实力", en: "Trusted Manufacturing Excellence" },
+    description: { tc: "我們的優勢", sc: "我们的优势", en: "Our Advantages" },
+    descriptionContext1: { 
+      tc: "統師香港公司是領先的產品標誌包裝、標籤及輔料製造商。我們提供全方位的品牌推廣、設計和生產服務，由零到物流服務一並滿足所有需求。",
+      sc: "統師香港公司是領先的產品標誌包裝、標籤及輔料製造商。我們提供全方位的品牌推廣、設計和生產服務，由零到物流服務一並滿足所有需求。",
+      en: "Label Master Hong Kong is a leading manufacturer of product labels, packaging, and supplementary materials. We offer comprehensive branding, design, and production services, fulfilling all needs from start to logistics.",
+    },
+    descriptionContext2: {
+      tc: "公司擁有豐富的包裝知識和經驗，以及專業的包裝技術團隊，能夠根據客戶的實際情況，設計出滿足需求且經濟高效的包裝解決方案。本公司已通過GRS認證和ISO9001品質管理系統認證，雄厚的技術力量和先進的印刷設備，例如Heidelberg four-color Speedmaster, Heidelberg, Heidelberg two-color offset printing machine, Heidelberg GTO, HP INDIGO 5600印刷機等，可提供設計、印刷、物流包裝設計服務。",
+      sc: "公司拥有丰富的包装知识和经验，以及专业的包装技术团队，能够根据客户的具体情况，设计出满足需求且经济高效的包装解决方案。本公司已通过GRS认证和ISO9001质量管理体系认证，雄厚的技术力量和先进的印刷设备，例如Heidelberg four-color Speedmaster, Heidelberg, Heidelberg two-color offset printing machine, Heidelberg GTO, HP INDIGO 5600印刷机等，可提供设计、印刷、物流包装设计服务。",
+      en: "The company possesses extensive packaging knowledge and experience, supported by a professional packaging technology team. We can design cost-effective packaging solutions tailored to the unique requirements of our clients. Our company is certified by GRS and ISO 9001 Quality Management System, equipped with robust technical strength and advanced printing equipment, including the Heidelberg four-color Speedmaster, two-color offset printing machines, Heidelberg GTO, and HP INDIGO 5600 printers, enabling us to provide design, printing, and logistics packaging design services.",
+    },
+    descriptionContext3: {
+      tc: "憑藉60餘年的經驗，我們與各行各業的公司合作，協助他們塑造和傳遞品牌形象。我們負責管理完整的生產和包裝流程，提供優質的產品和卓越的客戶服務。我們可以客制化任何項目，並交付令您的客戶驚艷的產品。憑藉我們在設計、製造和生產方面的豐富知識，我們是您講述品牌故事的專家合作夥伴。",
+      sc: "凭借60余年的经验，我们与各行各业的公司合作，协助他们塑造和传递品牌形象。我们负责管理完整的生产和包装流程，提供优质的产品和卓越的客户服务。我们可以客制化任何项目，并交付令您的客户惊艳的产品。凭借我们在设计、制造和生产方面的丰富知识，我们是您讲述品牌故事的专家合作伙伴。",
+      en: "With over 60 years of experience, we collaborate with companies across various industries to assist them in shaping and conveying their brand image. We manage the entire production and packaging process, ensuring high-quality products and outstanding customer service. We can customize any project to deliver products that will amaze your customers. With our rich expertise in design, manufacturing, and production, we are your expert partner in telling your brand story.",
+    },
     features: {
       tc: [
         { title: "全球出口", desc: "產品出口至30多個國家，服務全球時尚品牌" },
