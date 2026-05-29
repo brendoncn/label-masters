@@ -150,7 +150,7 @@ const ProductDetail = () => {
       </div>
 
       {/* Category Quick Nav */}
-      <div className="border-b border-border bg-card/50">
+      {/* <div className="border-b border-border bg-card/50">
         <div className="container-narrow mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex gap-1 overflow-x-auto py-3 scrollbar-hide">
             {categoryNav.map((c, i) => (
@@ -168,7 +168,7 @@ const ProductDetail = () => {
             ))}
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* Hero */}
       <section className="gradient-hero py-4">
@@ -253,7 +253,7 @@ const ProductDetail = () => {
       </section>
 
       {/* FAQ */}
-      <section className="section-padding bg-secondary/50">
+      {/* <section className="section-padding bg-secondary/50">
         <div className="container-narrow mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="mb-8 text-center text-2xl font-bold text-foreground sm:text-3xl">{t("categoryDetails.faqTitle") as string}</h2>
           <div className="mx-auto max-w-2xl">
@@ -267,7 +267,7 @@ const ProductDetail = () => {
             </Accordion>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Prev / Next */}
       <section className="border-t border-border bg-card">

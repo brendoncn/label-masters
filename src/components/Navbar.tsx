@@ -35,7 +35,7 @@ const Navbar = () => {
           <img
             src={logoUrl}
             alt={`${t("nav.brand") as string}${t("nav.brandAccent") as string}`}
-            className="h-14 w-auto object-contain [filter:drop-shadow(0_0_4px_hsl(var(--accent)/0.45))_drop-shadow(0_2px_6px_hsl(var(--primary)/0.25))] dark:[filter:drop-shadow(0_0_6px_hsl(var(--accent)/0.85))_drop-shadow(0_0_14px_hsl(var(--accent)/0.55))] dark:brightness-125"
+            className="h-14 w-auto object-contain dark:[filter:drop-shadow(0_0_6px_hsl(var(--accent)/0.85))_drop-shadow(0_0_14px_hsl(var(--accent)/0.55))] dark:brightness-125"
             height={40}
           />
         </Link>
