@@ -136,7 +136,12 @@ npm run build
 
 `npm run build` writes static files to **`dist/`**. Deploy that folder to any static host (Netlify, Vercel, GitHub Pages, S3 + CloudFront, nginx, etc.).
 
-- **SPA routing:** configure the host to serve `index.html` for unknown paths (fallback), so deep links like `/products/hangtags` work on refresh.
+- **SPA routing (refresh / deep links):** the repo includes fallback config so routes like `/products/hangtags` return `index.html` instead of 404:
+  - **Netlify / Cloudflare Pages:** `public/_redirects` (copied into `dist/` on build)
+  - **Vercel:** `vercel.json` at repo root
+  - **Apache:** `public/.htaccess` (copied into `dist/`)
+  - **Azure Static Web Apps:** `staticwebapp.config.json` at repo root
+  - **nginx:** `try_files $uri $uri/ /index.html;` in the site block
 - **Preview locally:** `npm run preview` serves `dist/` after a build.
 
 Typical CI steps: `npm ci` → `npx tsc --noEmit` → `npm run build` → upload or publish `dist/`.
